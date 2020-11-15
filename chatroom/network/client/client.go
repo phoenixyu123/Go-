@@ -57,7 +57,7 @@ func main() {
 	//使用go自带的log打开文件,设置日志的每行开头内容
 	logger := log.New(logfile, "\r\n", log.Ldate|log.Ltime|log.Lshortfile)
 
-	conn, err := net.Dial("tcp", "127.0.0.1:8080") //连接一致
+	conn, err := net.Dial("tcp", "127.0.0.1:21999") //连接一致
 
 	//打开用户个人log
 	useraddr := fmt.Sprintf("%s", conn.LocalAddr())

@@ -80,7 +80,7 @@ func doProcessMessage(message string) { //判断消息逻辑,判断消息到底�
 
 		}
 	} else { //说明在执行命令
-		contents := strings.Split(message	, "*")
+		contents := strings.Split(message, "*")
 		if strings.ToUpper(contents[1]) == "LIST" {
 			var ips string = ""
 			for i := range onlineConns {
@@ -125,7 +125,7 @@ func main() {
 	logger := log.New(logfile, "\r\n", log.Ldate|log.Ltime|log.Lshortfile)
 
 	//监听创建    net.Listen(协议,socket)
-	listensocket, err := net.Listen("tcp", "127.0.0.1:8080")
+	listensocket, err := net.Listen("tcp", "127.0.0.1:21999")
 	CheckError(err)
 	defer listensocket.Close() //用defer关闭连接
 	fmt.Println("服务器监听...")
