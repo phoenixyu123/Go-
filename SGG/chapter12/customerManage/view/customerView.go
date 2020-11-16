@@ -166,7 +166,7 @@ func (this *CustomerView) Modify() {
 		if this.customerService.FindById(id) == -1 {
 			fmt.Printf("找不到编号为 %v 的用户\n", id)
 		} else { //存在一个编号为id的用户
-			
+			this.customerService.ModifyUserInfo(id)
 		}
 
 	}
