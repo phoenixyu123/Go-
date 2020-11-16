@@ -31,9 +31,36 @@ func (this *CustomerService) CustomerList() []model.Customer {
 }
 
 //添加客户到customers切片中
-func (this *CustomerService) AddUser(customer model.Customer) bool {
+func (this *CustomerService) AddUser(customer model.Customer) bool { //！！！此处必须用指针方式进行绑定，否则每次都会分配新的customer
+	//此处如果不传递指针，则是值拷贝，会导致每一次都会进行创建一个全新的切片
 
+	//需要确定一个分配id的规则，如添加的顺序cunstemorNum
+	this.customerNum++
+	customer.Id = this.customerNum //分配ID
 	this.customers = append(this.customers, customer)
 
+	return true
+}
+
+//根据id查找客户在切片中对应的下标，没有返回-1
+func (this *CustomerService) FindById(id int) int {
+	index := -1 //默认是没有
+	for i, _ := range this.customers {
+		if this.customers[i].Id == id {
+			index = i
+			return index
+		}
+	}
+	return index
+}
+
+//根据id删除用户，从切片中
+func (this *CustomerService) DeleteUser(id int) bool {
+	index := this.FindById(id)
+	if index == -1 {
+		return false
+	} else { //---------------------------------------------------------------如何从切片中删除一个元素
+		this.customers = append(this.customers[:index], this.customers[index+1:]...) //注意最后要...!!!!!!!!!!!!!因为后面也是一个切片
+	}
 	return true
 }

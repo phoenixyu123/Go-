@@ -33,7 +33,7 @@ func (customer *Customer) MainMenu() {
 
 //返回用户的信息
 func (this *Customer) GetInfo() string {
-	info := fmt.Sprintf("\t%v\t%v\t%v\t%v\t%v\t%v\n", this.Id, this.Name, this.Gender,
-		this.Age, this.Phone, this.Email)//格式化后的字符串
+	info := fmt.Sprintf("%v\t%v\t%v\t%v\t%v\t%v", this.Id, this.Name, this.Gender,
+		this.Age, this.Phone, this.Email) //格式化后的字符串
 	return info
 }
