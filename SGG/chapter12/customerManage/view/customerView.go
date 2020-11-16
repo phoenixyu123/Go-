@@ -35,7 +35,8 @@ func (this *CustomerView) MainMenu() {
 			// fmt.Println("添加")
 			this.Add()
 		case "2":
-			fmt.Println("修改")
+			// fmt.Println("修改")
+			this.Modify()
 		case "3":
 			// fmt.Println("删除")
 			this.Delete()
@@ -49,7 +50,7 @@ func (this *CustomerView) MainMenu() {
 			fmt.Println("输入错误")
 		}
 
-		if !this.Loop {
+		if this.Loop == false {
 			fmt.Println("已退出")
 			break
 		}
@@ -145,9 +146,29 @@ func (this *CustomerView) Exit() {
 		fmt.Scanln(&sure)
 		if strings.ToUpper(sure) == "Y" {
 			this.Loop = false
+			return
 		} else if strings.ToUpper(sure) == "N" {
 			return
 		}
+	}
+}
+
+//Modify
+func (this *CustomerView) Modify() {
+	fmt.Println("-------------------------修改用户-------------------------")
+	for {
+		fmt.Println("请输入修改用户的ID(输入-1退出)：")
+		id := 0
+		fmt.Scanln(&id)
+		if id == -1 { //退出
+			return
+		}
+		if this.customerService.FindById(id) == -1 {
+			fmt.Printf("找不到编号为 %v 的用户\n", id)
+		} else { //存在一个编号为id的用户
+			
+		}
+
 	}
 }
 

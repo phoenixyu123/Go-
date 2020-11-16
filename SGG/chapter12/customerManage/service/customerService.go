@@ -2,6 +2,7 @@ package service
 
 import (
 	"SGG/chapter12/customerManage/model"
+	"fmt"
 )
 
 //完成显示客户列表的功能
@@ -63,4 +64,42 @@ func (this *CustomerService) DeleteUser(id int) bool {
 		this.customers = append(this.customers[:index], this.customers[index+1:]...) //注意最后要...!!!!!!!!!!!!!因为后面也是一个切片
 	}
 	return true
+}
+
+//根据id获取信息,并进行修改
+func (this *CustomerService) GetUserInfo(id int) {
+	for i, _ := range this.customers {
+		if id == this.customers[i].Id {
+			fmt.Println("姓名(%v):", this.customers[i].Name)
+			name := ""
+			fmt.Scanln(&name)
+			if name != "" {
+				this.customers[i].Name = name
+			}
+			fmt.Println("性别(%v):", this.customers[i].Gender)
+			gender := ""
+			fmt.Scanln(&gender)
+			if gender != "" {
+				this.customers[i].Gender = gender
+			}
+			fmt.Println("年龄(%v):", this.customers[i].Age)
+			age := -1
+			fmt.Scanln(&age)
+			if age != -1 {
+				this.customers[i].Age = age
+			}
+			fmt.Println("电话(%v):", this.customers[i].Phone)
+			phone := ""
+			fmt.Scanln(&phone)
+			if phone != "" {
+				this.customers[i].Phone = phone
+			}
+			fmt.Println("邮箱(%v):", this.customers[i].Email)
+			email := ""
+			fmt.Scanln(&email)
+			if email != "" {
+				this.customers[i].Email = email
+			}
+		}
+	}
 }
