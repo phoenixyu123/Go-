@@ -43,9 +43,10 @@ func (this *CustomerView) MainMenu() {
 			// fmt.Println("查看")
 			this.List() //查看用户的方法在CS.go中构造,list方法里调用CS中的UserList，调用C中的GetInfo
 		case "5":
-			this.Loop = false
+			// this.Loop = false
+			this.Exit()
 		default:
-			fmt.Println("错误")
+			fmt.Println("输入错误")
 		}
 
 		if !this.Loop {
@@ -120,7 +121,7 @@ func (this *CustomerView) Delete() {
 			sure := ""
 			fmt.Scanln(&sure)
 			if strings.ToUpper(sure) == "Y" {
-				if this.customerService.DeleteUser(id) {
+				if this.customerService.DeleteUser(id) { //真正的删除操作，除此以外全为交互代码
 					fmt.Println("-------------------------删除成功-------------------------")
 				} else {
 					fmt.Println("-----------------------找不到该用户------------------------")
@@ -134,6 +135,20 @@ func (this *CustomerView) Delete() {
 
 	}
 
+}
+
+//Exit
+func (this *CustomerView) Exit() {
+	for {
+		fmt.Println("确认退出？(Y/N):")
+		sure := ""
+		fmt.Scanln(&sure)
+		if strings.ToUpper(sure) == "Y" {
+			this.Loop = false
+		} else if strings.ToUpper(sure) == "N" {
+			return
+		}
+	}
 }
 
 func main() {
