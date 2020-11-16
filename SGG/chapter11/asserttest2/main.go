@@ -20,6 +20,8 @@ func TypeJudge(items ...interface{}) {
 			fmt.Printf("第%v的参数类型是float64，值是%v\n", index, val)
 		case int:
 			fmt.Printf("第%v的参数类型是int，值是%v\n", index, val)
+		case Student:
+			fmt.Printf("第%v的参数类型是Student类，值是%v\n", index, val) //可以断言自己定义的类型
 		default:
 			fmt.Printf("第%v的参数类型不确定，值是%v\n", index, val)
 		}
