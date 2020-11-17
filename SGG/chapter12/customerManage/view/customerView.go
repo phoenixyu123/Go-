@@ -163,10 +163,29 @@ func (this *CustomerView) Modify() {
 		if id == -1 { //退出
 			return
 		}
-		if this.customerService.FindById(id) == -1 {
+		index, oldname, oldgender, oldage, oldphone, oldemail := this.customerService.FindById(id)
+		if index == -1 {
 			fmt.Printf("找不到编号为 %v 的用户\n", id)
 		} else { //存在一个编号为id的用户
-			this.customerService.ModifyUserInfo(id)
+			newname, newgender, newage, newphone, newemail := "", "", -1, "", ""
+			fmt.Println("按顺序修改，输入回车跳过")
+			fmt.Printf("姓名(%v):", oldname)
+			fmt.Scanln(&newname)
+			fmt.Printf("性别(%v):", oldgender)
+			fmt.Scanln(&newgender)
+			fmt.Printf("年龄(%v):", oldage)
+			fmt.Scanln(&newage)
+			fmt.Printf("电话(%v):", oldphone)
+			fmt.Scanln(&newphone)
+			fmt.Printf("邮箱(%v):", oldemail)
+			fmt.Scanln(&newemail)
+			if this.customerService.ModifyUserInfo(index, newname, newgender,
+				newage, newphone, newemail) {
+				fmt.Println("-------------------------修改完成-------------------------")
+			} else {
+				fmt.Println("-------------------------修改失败-------------------------")
+			}
+
 		}
 
 	}

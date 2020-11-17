@@ -2,7 +2,6 @@ package service
 
 import (
 	"SGG/chapter12/customerManage/model"
-	"fmt"
 )
 
 //完成显示客户列表的功能
@@ -43,21 +42,26 @@ func (this *CustomerService) AddUser(customer model.Customer) bool { //！！！
 	return true
 }
 
-//根据id查找客户在切片中对应的下标，没有返回-1
-func (this *CustomerService) FindById(id int) int {
+//根据id查找客户在切片中对应的下标，没有返回-1 //Id,Name,Gender,Age,Phone,Email
+func (this *CustomerService) FindById(id int) (int, string, string, int, string, string) {
 	index := -1 //默认是没有
 	for i, _ := range this.customers {
 		if this.customers[i].Id == id {
 			index = i
-			return index
+			name := this.customers[i].Name
+			gender := this.customers[i].Gender
+			age := this.customers[i].Age
+			phone := this.customers[i].Phone
+			email := this.customers[i].Email
+			return index, name, gender, age, phone, email
 		}
 	}
-	return index
+	return index, "", "", -1, "", ""
 }
 
 //根据id删除用户，从切片中
 func (this *CustomerService) DeleteUser(id int) bool {
-	index := this.FindById(id)
+	index, _, _, _, _, _ := this.FindById(id)
 	if index == -1 {
 		return false
 	} else { //---------------------------------------------------------------如何从切片中删除一个元素
@@ -67,39 +71,23 @@ func (this *CustomerService) DeleteUser(id int) bool {
 }
 
 //根据id获取信息,并进行修改
-func (this *CustomerService) ModifyUserInfo(id int) {
-	for i, _ := range this.customers {
-		if id == this.customers[i].Id {
-			fmt.Printf("姓名(%v):", this.customers[i].Name)
-			name := ""
-			fmt.Scanln(&name)
-			if name != "" {
-				this.customers[i].Name = name
-			}
-			fmt.Printf("性别(%v):", this.customers[i].Gender)
-			gender := ""
-			fmt.Scanln(&gender)
-			if gender != "" {
-				this.customers[i].Gender = gender
-			}
-			fmt.Printf("年龄(%v):", this.customers[i].Age)
-			age := -1
-			fmt.Scanln(&age)
-			if age != -1 {
-				this.customers[i].Age = age
-			}
-			fmt.Printf("电话(%v):", this.customers[i].Phone)
-			phone := ""
-			fmt.Scanln(&phone)
-			if phone != "" {
-				this.customers[i].Phone = phone
-			}
-			fmt.Printf("邮箱(%v):", this.customers[i].Email)
-			email := ""
-			fmt.Scanln(&email)
-			if email != "" {
-				this.customers[i].Email = email
-			}
-		}
+func (this *CustomerService) ModifyUserInfo(id int, newname, newgender string,
+	newage int, newphone, newemail string) bool {
+	// index, oldname, oldgender, oldage, oldphone, oldemail := this.FindById(id)
+	if newname != "" {
+		this.customers[id].Name = newname
 	}
+	if newgender != "" {
+		this.customers[id].Gender = newgender
+	}
+	if newage != -1 {
+		this.customers[id].Age = newage
+	}
+	if newphone != "" {
+		this.customers[id].Phone = newphone
+	}
+	if newemail != "" {
+		this.customers[id].Email = newemail
+	}
+	return true
 }
