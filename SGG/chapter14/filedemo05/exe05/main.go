@@ -1,6 +1,7 @@
 package main
 
 import (
+	"SGG/SelfImport/File/JudgeFileExist"
 	"fmt"
 	"io/ioutil"
 )
@@ -18,6 +19,8 @@ func main() {
 		fmt.Println(err)
 		return
 	}
+	judge, err := JudgeFileExist.PathExist(fp2)
+	fmt.Println(judge, err)
 	//ioutil.WriteFile(fp,[]byte,mode)
 	err = ioutil.WriteFile(fp2, content, 0666)
 	if err != nil {
