@@ -38,7 +38,8 @@ func main() {
 		if err == io.EOF { //读到文件末尾退出
 			break
 		}
-		for _, v := range str {
+		str2 := []rune(str) //读取中文
+		for _, v := range str2 {
 			fmt.Print(string(v))
 			switch { //此处不用字符匹配当作if
 			case v >= 'a' && v <= 'z':
