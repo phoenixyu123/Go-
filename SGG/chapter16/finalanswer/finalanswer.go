@@ -1,4 +1,4 @@
-package main
+package finalanswer
 
 import (
 	"bufio"
@@ -14,7 +14,7 @@ var writeCount int = 100  //随即个数
 var sortChanNum int = 10
 var sortCount int = 100
 
-func cheakError(err error) {
+func CheckError(err error) {
 	if err != nil {
 		panic(err)
 	}
@@ -22,7 +22,7 @@ func cheakError(err error) {
 
 func writeDataToFile(filePathTitle, filePathSuf string, i int, writeChanOk chan<- bool) {
 	file, err := os.OpenFile(filePathTitle+strconv.Itoa(i)+filePathSuf, os.O_CREATE|os.O_RDWR, 0666)
-	cheakError(err)
+	CheckError(err)
 	defer file.Close()
 	writer := bufio.NewWriter(file)
 	for i := 0; i < writeCount; i++ {
@@ -34,7 +34,7 @@ func writeDataToFile(filePathTitle, filePathSuf string, i int, writeChanOk chan<
 
 func sortDataToChan(filePathTitle, filePathSuf string, i int, dataChan chan string, sortChanOk chan<- bool) {
 	file, err := os.OpenFile(filePathTitle+strconv.Itoa(i)+filePathSuf, os.O_CREATE|os.O_RDWR, 0666)
-	cheakError(err)
+	CheckError(err)
 	defer file.Close()
 	//使用int切片进行排序***************************************
 	intSlice := &[]int{} //注意此处定义，看看以往的intSlice:=[]int{1,2,3,4}
@@ -55,7 +55,7 @@ func sortDataToChan(filePathTitle, filePathSuf string, i int, dataChan chan stri
 
 func writeDataToNewFile(filePathTitle, filePathSuf string, i int, v string, newWriteChanOk chan<- bool) {
 	file, err := os.OpenFile(filePathTitle+strconv.Itoa(i)+filePathSuf, os.O_CREATE|os.O_RDWR, 0666)
-	cheakError(err)
+	CheckError(err)
 	defer file.Close()
 	writer := bufio.NewWriter(file)
 	writer.WriteString("\n" + v)
