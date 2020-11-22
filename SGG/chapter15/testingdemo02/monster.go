@@ -32,9 +32,18 @@ func (this *Monster) Store() bool {
 
 func (this *Monster) Restore() bool {
 	//先从文件读取字符串
-	fp:= "C:/study/GoList/src/SGG/chapter15/testingdemo02/test.log"
-	data,err := ioutil.ReadFile(fp)
-	if err!=nil{
-		
+	fp := "C:/study/GoList/src/SGG/chapter15/testingdemo02/test.log"
+	data, err := ioutil.ReadFile(fp)
+	if err != nil {
+		fmt.Println("读取错误", err)
+		return false
 	}
+	//读取到[]byte data
+	// fmt.Println(string(data))
+	err = json.Unmarshal(data, this)
+	if err != nil {
+		fmt.Println("反序列化错误!", err)
+		return false
+	}
+	return true
 }
