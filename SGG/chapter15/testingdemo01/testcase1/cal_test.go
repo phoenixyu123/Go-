@@ -21,6 +21,8 @@ func TestAddUpper(t *testing.T) {
 
 }
 
+//go test -v -test.run TestHello可以实现单个函数测试
+//go test -v cal_test.go cal.go可以实现单个文件测试
 func TestHello(t *testing.T) {
 	fmt.Println("Hello函数被调用")
 }

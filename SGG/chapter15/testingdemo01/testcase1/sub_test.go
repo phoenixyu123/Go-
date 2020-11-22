@@ -9,6 +9,7 @@ import (
 //将test函数引入testing框架,框架内包含main函数,实际上是testing 进行了import cal_test.go
 //然后引用Test开头的函数,因此函数开头必须为Test,而参数必须包含t *testting.T
 //函数名Test后面第一个字母必须是大写!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+
 func TestGetSub(t *testing.T) {
 	res := GetSub(10, 5)
 	if res != 5 {

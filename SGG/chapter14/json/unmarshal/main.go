@@ -65,5 +65,5 @@ func unMarshalSlice() {
 func main() {
 	unMarshalStruct()
 	unMarshalMap()
-	unMarshalSlice()
+	unMarshalSlice(	)
 }
