@@ -1,7 +1,8 @@
-package finalanswer
+package main
 
 import (
 	"bufio"
+	"fmt"
 	"math/rand"
 	"os"
 	"sort"
@@ -59,6 +60,7 @@ func writeDataToNewFile(filePathTitle, filePathSuf string, i int, v string, newW
 	defer file.Close()
 	writer := bufio.NewWriter(file)
 	writer.WriteString("\n" + v)
+	fmt.Println(v)
 	writer.Flush() //这一句老忘
 	newWriteChanOk <- true
 
