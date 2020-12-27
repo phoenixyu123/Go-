@@ -24,7 +24,7 @@ func findPrimeNum(intChan chan int, i int, primeChan chan int, exitChan chan<- b
 		if !ok {
 			break
 		}
-		for j := 2; j < int(math.Sqrt(float64(num))); j++ {
+		for j := 2; j < int(math.Sqrt(float64(num)))+1; j++ {
 			if num%j == 0 {
 				flag = false
 				break
