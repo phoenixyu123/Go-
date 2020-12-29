@@ -66,7 +66,8 @@ func (c *Context) SetHeader(key string, value string) {
 
 //c.String实现在网页输出hello %s
 func (c *Context) String(code int, format string, values ...interface{}) {
-	c.SetHeader("Content-Type", "text/plain")
+	c.SetHeader("Content-Type", "text/plain") //一个key一个value
+	//Header=>map[string]string =>Header[Content-Type]=text/plain
 	c.Status(code)
 	c.Writer.Write([]byte(fmt.Sprintf(format, values...)))
 	//Write以有线格式将头域写入w。
@@ -89,9 +90,14 @@ func (c *Context) JSON(code int, obj interface{}) {
 	}
 }
 
+//然而并没有用到
 func (c *Context) Data(code int, data []byte) {
 	c.Status(code)
 	c.Writer.Write(data)
+	// Write向连接中写入作为HTTP的一部分回复的数据。
+	// 如果被调用时还未调用WriteHeader，本方法会先调用WriteHeader(http.StatusOK)
+	// 如果Header中没有"Content-Type"键，
+	// 本方法会使用包函数DetectContentType检查数据的前512字节，将返回值作为该键的值。
 }
 
 func (c *Context) HTML(code int, html string) {

@@ -6,7 +6,8 @@ import (
 
 //定义框架入口
 //HandlerFunc定义了gee使用的请求处理程序
-type HandlerFunc func(*Context)
+type HandlerFunc func(*Context) //注意此处不再是
+//type HandlerFunc func(http.ResponseWriter,*http.Request)了
 
 //Engine 实现了ServeHTTP的接口
 type Engine struct {

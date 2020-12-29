@@ -18,7 +18,7 @@ func newRouter() *router {
 
 //添加路由到路由映射表
 func (this *router) addRoute(method string, pattern string, handler HandlerFunc) {
-	log.Printf("Route %4s - $s", method, pattern)
+	log.Printf("Route %4s - %s", method, pattern)
 	key := method + "-" + pattern
 	this.handlers[key] = handler
 }
